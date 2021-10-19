@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dto.MovieMemberVO;
 import dto.MovieMemberVO;
@@ -34,13 +36,14 @@ public class MovieMemberDAO {
 	}
 
 	public ArrayList<MovieMemberVO> getAllMembers() {
-		String SQL = "SELECT * FROM MovieMember"; // db회원부분
+		String SQL = "SELECT * FROM MovieMember"; // 전체회원조회
 		try {
 			rs = st.executeQuery(SQL);
 			while (rs.next()) {
 				String id = rs.getString("id");
 				String pw = rs.getString("pw");
-				MovieMemberVO VO = new MovieMemberVO(id, pw);
+				String born = rs.getString("born");
+				MovieMemberVO VO = new MovieMemberVO(id, pw, born);
 				dtos.add(VO);
 			}
 		} catch (SQLException e) {
@@ -49,8 +52,8 @@ public class MovieMemberDAO {
 		return dtos;
 	}
 
-	public ArrayList<MovieMemberVO> insertMovieMembers(String id, String pw,String born) {
-		String SQL = "INSERT INTO MovieMember (id,pw,born) values (?,?,?)"; // -----에 테이블명 입력해야됨
+	public ArrayList<MovieMemberVO> insertMovieMembers(String id, String pw, String born) {
+		String SQL = "INSERT INTO MovieMember (id,pw,born) values (?,?,?)";
 		try {
 			pstmt = con.prepareStatement(SQL);
 			pstmt.setString(1, id);

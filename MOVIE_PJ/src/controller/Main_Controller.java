@@ -15,6 +15,7 @@ public class Main_Controller {
 		String id = "";
 		String pw = "";
 		String born = "";
+		String loginID="";
 		ArrayList<MovieMemberVO> dtos;
 		MovieMemberService service = new MovieMemberService();
 		Scanner sc = new Scanner(System.in);
@@ -31,18 +32,18 @@ public class Main_Controller {
 			switch (choice) {
 			case 1:
 				// 회원가입
-				check=false;
+				check = false; // 아이디 중복 체크를 위한 bool타입
 				dtos = service.getAllMembers();
 				System.out.print("아이디 입력 >>");
 				id = sc.next();
 				for (int i = 0; i < dtos.size(); i++) {
 					if (dtos.get(i).getID().equals(id)) { // getid와 id가 일치하면
 						System.out.println("현재 사용중인 아이디입니다.");
-						check=true; // check가 true가 되고 break;
+						check = true; // check가 true가 되고 break;
 						break;
 					}
 				}
-				if (check==false) { // check가 false라면 가입진행
+				if (check == false) { // check가 false라면 가입진행
 					System.out.print("비밀번호 입력 >>");
 					pw = sc.next();
 					System.out.print("생년월일 입력(yyyy-MM-dd) >>");
@@ -74,11 +75,11 @@ public class Main_Controller {
 				break;
 			case 3:
 				// 로그인
-				check = false; // 로그인 체크를 위한 bool타입
+				check = false;
 				dtos = service.getAllMembers();
-				System.out.println("아이디 입력 >>");
+				System.out.print("아이디 입력 >>");
 				id = sc.next();
-				System.out.println("비밀번호 입력 >>");
+				System.out.print("비밀번호 입력 >>");
 				pw = sc.next();
 				for (int i = 0; i < dtos.size(); i++) {
 					if (dtos.get(i).getID().equals(id)) {
@@ -91,16 +92,42 @@ public class Main_Controller {
 					System.out.println("로그인 실패");
 					System.out.println("아이디 혹은 비밀번호를 다시 확인해주세요.");
 					break; // 로그인실패 전메뉴로 돌아감
-				} else
+				} else {
 					System.out.println("로그인 성공!");
+					loginID=id; // 로그인성공한 id를 loginID에 저장
+				}
 
-				subMenu();
+				subMenu();// 로그인 이후 서브메뉴 (정보조회,예약 등)
 				logchoice = sc.nextInt();
 				if (logchoice == 0) { // 로그아웃
 					break;
 				}
 				switch (logchoice) {
 				case 1:
+					//정보조회
+					int num=0;
+					check=false;
+					System.out.print("비밀번호 입력 >>");
+					pw=sc.next();
+					for(int i=0; i<dtos.size();i++) {
+						if (dtos.get(i).getID().equals(loginID)) {
+							if (dtos.get(i).getPW().equals(pw)) {
+								check = true;
+								num=i; // num에 로그인했던 아이디의 index값을 저장
+							}
+						}
+					}
+					if(check==true) {						
+						System.out.printf("아이디:%s\n", dtos.get(num).getID());
+						System.out.printf("비밀번호:%s\n", dtos.get(num).getPW());
+						
+						String cutTime=dtos.get(num).getBorn().substring(0,10); // 년,월,일만 나오게 
+																				// 시,분,초를 자름
+						System.out.printf("생년월일:%s\n", cutTime);
+						System.out.println();
+					}else {
+						System.out.println("비밀번호를 다시 확인해주세요.");
+					}
 					break;
 				case 2:
 
@@ -125,6 +152,6 @@ public class Main_Controller {
 	}
 
 	public static void subMenu() {
-
+		System.out.println("1.회원정보조회");
 	}
 }
