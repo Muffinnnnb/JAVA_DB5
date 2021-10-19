@@ -17,7 +17,7 @@ public class MovieMemberService {
 		return dao.getAllMembers();
 	}
 
-	public ArrayList<MovieMemberVO> insertMovieMembers(String id, String pw,String born) {
+	public ArrayList<MovieMemberVO> insertMovieMembers(String id, String pw,int born) {
 		return dao.insertMovieMembers(id,pw,born);
 	}
 

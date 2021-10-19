@@ -14,7 +14,7 @@ public class Main_Controller {
 		int logchoice = 0;
 		String id = "";
 		String pw = "";
-		String born = "";
+		int born = 0;
 		String loginID="";
 		ArrayList<MovieMemberVO> dtos;
 		MovieMemberService service = new MovieMemberService();
@@ -46,8 +46,8 @@ public class Main_Controller {
 				if (check == false) { // check가 false라면 가입진행
 					System.out.print("비밀번호 입력 >>");
 					pw = sc.next();
-					System.out.print("생년월일 입력(yyyy-MM-dd) >>");
-					born = sc.next();
+					System.out.print("나이 입력 >>");
+					born = sc.nextInt();
 					dtos = service.insertMovieMembers(id, pw, born);
 				}
 				break;
@@ -119,11 +119,8 @@ public class Main_Controller {
 					}
 					if(check==true) {						
 						System.out.printf("아이디:%s\n", dtos.get(num).getID());
-						System.out.printf("비밀번호:%s\n", dtos.get(num).getPW());
-						
-						String cutTime=dtos.get(num).getBorn().substring(0,10); // 년,월,일만 나오게 
-																				// 시,분,초를 자름
-						System.out.printf("생년월일:%s\n", cutTime);
+						System.out.printf("비밀번호:%s\n", dtos.get(num).getPW());												
+						System.out.printf("나이:%d\n", dtos.get(num).getBorn());
 						System.out.println();
 					}else {
 						System.out.println("비밀번호를 다시 확인해주세요.");

@@ -42,7 +42,7 @@ public class MovieMemberDAO {
 			while (rs.next()) {
 				String id = rs.getString("id");
 				String pw = rs.getString("pw");
-				String born = rs.getString("born");
+				int born = rs.getInt("born");
 				MovieMemberVO VO = new MovieMemberVO(id, pw, born);
 				dtos.add(VO);
 			}
@@ -52,13 +52,13 @@ public class MovieMemberDAO {
 		return dtos;
 	}
 
-	public ArrayList<MovieMemberVO> insertMovieMembers(String id, String pw, String born) {
+	public ArrayList<MovieMemberVO> insertMovieMembers(String id, String pw, int born) {
 		String SQL = "INSERT INTO MovieMember (id,pw,born) values (?,?,?)";
 		try {
 			pstmt = con.prepareStatement(SQL);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
-			pstmt.setString(3, born);
+			pstmt.setInt(3, born);
 			pstmt.executeUpdate();
 			System.out.println("가입 완료!");
 

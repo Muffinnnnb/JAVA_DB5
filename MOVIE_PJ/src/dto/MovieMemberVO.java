@@ -3,9 +3,9 @@ package dto;
 public class MovieMemberVO {
 	private String id;
 	private String pw;
-	private String born;
+	private int born;
 	
-	public MovieMemberVO(String id,String pw, String born) {
+	public MovieMemberVO(String id,String pw, int born) {
 		this.id=id;
 		this.pw=pw;
 		this.born=born;
@@ -23,10 +23,10 @@ public class MovieMemberVO {
 	public String getPW() {
 		return pw;
 	}
-	public void setBorn(String born) {
+	public void setBorn(int born) {
 		this.born=born;
 	}
-	public String getBorn() {
+	public int getBorn() {
 		return born;
 	}
 
