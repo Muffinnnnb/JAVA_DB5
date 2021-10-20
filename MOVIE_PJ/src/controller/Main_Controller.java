@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import dto.MovieMemberVO;
+import dto.MovieVO;
+
 import service.MovieMemberService;
+import service.MovieService;
 
 public class Main_Controller {
 
@@ -17,13 +20,17 @@ public class Main_Controller {
 		int born = 0;
 		String loginID="";
 		ArrayList<MovieMemberVO> dtos;
+		ArrayList<MovieVO> dtos2;
 		MovieMemberService service = new MovieMemberService();
+		MovieService service2 = new MovieService();
+		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("┏                                         ┒");
 		System.out.println("              영화 예약 프로그램 ");
 		System.out.println("┖                                         ┚");
 
 		while (true) {
+
 			Menu();
 			choice = sc.nextInt();
 			if (choice == 0) { // 종료
@@ -102,10 +109,11 @@ public class Main_Controller {
 				if (logchoice == 0) { // 로그아웃
 					break;
 				}
+				int num=0;
 				switch (logchoice) {
 				case 1:
 					//정보조회
-					int num=0;
+					num=0;
 					check=false;
 					System.out.print("비밀번호 입력 >>");
 					pw=sc.next();
@@ -127,9 +135,21 @@ public class Main_Controller {
 					}
 					break;
 				case 2:
-
+					dtos2 = service2.getAllTitles();
+					
+					System.out.print("출력 >> \n");
+					for(int i=0; i<dtos2.size();i++) {
+						if (dtos2.get(i).getSeat()==0) {
+							System.out.printf("제목:%s\n", dtos2.get(i).getTitle());
+							System.out.printf("제한 연령:%s\n", dtos2.get(i).getAge_limit());
+							System.out.printf("시간:%s\n\n", dtos2.get(i).getMovie_time());
+							}
+						}
+					
 					break;
+					
 				case 3:
+					
 					break;
 				}
 
@@ -150,5 +170,19 @@ public class Main_Controller {
 
 	public static void subMenu() {
 		System.out.println("1.회원정보조회");
+		
+		
+		
+		System.out.println("2.상영중인 영화 목록");
+		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
