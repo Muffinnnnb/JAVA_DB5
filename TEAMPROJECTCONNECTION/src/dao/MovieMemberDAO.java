@@ -16,36 +16,77 @@ public class MovieMemberDAO {
 	private Statement st;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
-	
+
 	public MovieMemberDAO() {
 		dtos = new ArrayList<MovieMemberVO>();
 		try {
-			String user="system";
-			String pw="1234";
-			String url="jdbc:oracle:thin:@localhost:1521:XE";
+			String user = "system";
+			String pw = "1234";
+			String url = "jdbc:oracle:thin:@cyzhsss.iptime.org:1521:XE";
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con=DriverManager.getConnection(url,user,pw);
-			st=con.createStatement();
-		}catch(Exception e) {
-			System.out.println("데이터베이스 연결 오류"+e.getMessage());
-		}	
+			con = DriverManager.getConnection(url, user, pw);
+			st = con.createStatement();
+		} catch (Exception e) {
+			System.out.println("데이터베이스 연결 오류:" + e.getMessage());
+		}
 	}
 
-	public ArrayList<MovieMemberVO> getInform() {
-		String SQL="SELECT * FROM movie ";
+	public ArrayList<MovieMemberVO> getAllMembers() {
+		String SQL = "SELECT * FROM MovieMember"; // 전체회원조회
 		try {
-			rs=st.executeQuery(SQL);
-			while(rs.next()) {	
-				String title = rs.getString("title");
-				int age_limit = rs.getInt("age_limit");
-				int movie_time = rs.getInt("movie_time");
-				int seat = rs.getInt("seat");
-				MovieMemberVO VO=new MovieMemberVO(title,age_limit,movie_time,seat);
+			rs = st.executeQuery(SQL);
+			while (rs.next()) {
+				String id = rs.getString("id");
+				String pw = rs.getString("pw");
+				int born = rs.getInt("born");
+				MovieMemberVO VO = new MovieMemberVO(id, pw, born);
 				dtos.add(VO);
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return dtos;
 	}
+
+	public ArrayList<MovieMemberVO> insertMovieMembers(String id, String pw, int born) {
+		String SQL = "INSERT INTO MovieMember (id,pw,born) values (?,?,?)";
+		try {
+			pstmt = con.prepareStatement(SQL);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			pstmt.setInt(3, born);
+			pstmt.executeUpdate();
+			System.out.println("가입 완료!");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dtos;
+	}
+
+	public ArrayList<MovieMemberVO> deleteMovieMembers(String id) {
+		String SQL = "delete from MovieMember where id=? ";
+		try {
+			pstmt = con.prepareStatement(SQL);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dtos;
+	}
+	
+	public ArrayList<MovieMemberVO> updateMovieMembers(String id,String pw) {
+		String SQL = "update MovieMember id=?,pw=? ";
+		try {
+			pstmt = con.prepareStatement(SQL);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dtos;
+	}
+
 }

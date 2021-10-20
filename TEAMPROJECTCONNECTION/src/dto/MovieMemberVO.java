@@ -1,40 +1,32 @@
 package dto;
 
 public class MovieMemberVO {
+	private String id;
+	private String pw;
+	private int born;
 	
-	private String title;
-	private int age_limit;
-	private int movie_time;
-	private int seat;
-	
-	public MovieMemberVO(String title,int age_limit, int movie_time,int seat) {
-		this.title=title;
-		this.age_limit=age_limit;
-		this.movie_time=movie_time;
-		this.seat=seat;
+	public MovieMemberVO(String id,String pw, int born) {
+		this.id=id;
+		this.pw=pw;
+		this.born=born;
+
 	}
-	public void setTitle(String title) {
-		this.title=title;
+	public void setID(String id) {
+		this.id=id;
 	}
-	public String getTitle() {
-		return title;
+	public String getID() {
+		return id;
 	}
-	public void setAge_limit(int age_limit) {
-		this.age_limit=age_limit;
+	public void setPW(String pw) {
+		this.pw=pw;
 	}
-	public int getAge_limit() {
-		return age_limit;
+	public String getPW() {
+		return pw;
 	}
-	public void setMovie_time(int movie_time) {
-		this.movie_time=movie_time;
+	public void setBorn(int born) {
+		this.born=born;
 	}
-	public int getMovie_time() {
-		return movie_time;
-	}
-	public void setSeat(int seat) {
-		this.seat=seat;
-	}
-	public int getSeat() {
-		return seat;
+	public int getBorn() {
+		return born;
 	}
 }

@@ -7,10 +7,25 @@ import dto.MovieMemberVO;
 
 public class MovieMemberService {
 	private MovieMemberDAO dao;
+
 	public MovieMemberService() {
-		dao=new MovieMemberDAO();
+		dao = new MovieMemberDAO();
 	}
-	public ArrayList<MovieMemberVO> getInform(){
-		return dao.getInform();
+
+	public ArrayList<MovieMemberVO> getAllMembers() {
+
+		return dao.getAllMembers();
+	}
+
+	public ArrayList<MovieMemberVO> insertMovieMembers(String id, String pw,int born) {
+		return dao.insertMovieMembers(id,pw,born);
+	}
+
+	public ArrayList<MovieMemberVO> DeleteMovieMembers(String id) {
+		return dao.deleteMovieMembers(id);
+	}
+	
+	public ArrayList<MovieMemberVO> updateMovieMembers(String id, String pw) {
+		return dao.updateMovieMembers(id,pw);
 	}
 }
