@@ -133,9 +133,11 @@ public class Main_Controller {
 						break;
 					case 2:
 						// 영화 예약
+						int seatchoice=0;
+						String timeSelect="";
 						System.out.println("===== 현재 상영중인 영화 목록 =====");
 						dtos2 = service2.getAllMovie();
-						int j = 1; int num2=0;
+						int j = 1; 
 						int k = 1; // j=콘솔창에 보여지는 영화 순서 k=중복되지 않는 영화제목순서
 						for (int i = 1; i < 5; i++) {
 							System.out.print(j + "." + dtos2.get(k).getTitle() + " ");
@@ -170,6 +172,7 @@ public class Main_Controller {
 						for (int i = 0; i < dtos2.size(); i++) {
 							if (dtos2.get(i).getTitle().equals(title)) {
 								if (dtos2.get(i).getMovie_Time().contains(timechoice)) {
+									timeSelect=dtos2.get(i).getMovie_Time(); // timeSelect에 영화시간정보 저장
 									if (dtos2.get(i).getReserved() != 0) { // 이미 예약돼있다면 숫자대신 *로 표시
 										System.out.print(" |*|");
 									} else if (dtos2.get(i).getReserved() == 0) {
@@ -184,7 +187,12 @@ public class Main_Controller {
 								}
 							}
 						
-						}System.out.println();
+						}System.out.println("\n");
+						System.out.print("'*'표시가 없는 자리번호를 입력해주세요 >>");
+						seatchoice=sc.nextInt();
+						dtos2=service2.UpdateMovieReserved(title,timeSelect,seatchoice);
+						
+						
 
 						break;
 					case 3:

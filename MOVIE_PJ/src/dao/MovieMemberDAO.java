@@ -22,7 +22,7 @@ public class MovieMemberDAO {
 		try {
 			String user = "system";
 			String pw = "1234";
-			String url = "jdbc:oracle:thin:@localhost:1521:XE";
+			String url = "jdbc:oracle:thin:@cyzhsss.iptime.org:1521:XE";
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			con = DriverManager.getConnection(url, user, pw);
 			st = con.createStatement();

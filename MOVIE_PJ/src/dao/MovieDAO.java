@@ -6,23 +6,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dto.MovieVO;
 
 public class MovieDAO {
-	private ArrayList<MovieVO> mdtos;
+	private ArrayList<MovieVO> dtos2;
 	private Connection con;
 	private Statement st;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
 	public MovieDAO() {
-		mdtos = new ArrayList<MovieVO>();
+		dtos2 = new ArrayList<MovieVO>();
 		try {
 			String user = "system";
 			String pw = "1234";
-			String url = "jdbc:oracle:thin:@localhost:1521:XE";
+			String url = "jdbc:oracle:thin:@cyzhsss.iptime.org:1521:XE";
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			con = DriverManager.getConnection(url, user, pw);
 			st = con.createStatement();
@@ -42,11 +44,27 @@ public class MovieDAO {
 				int seat=rs.getInt("seat");
 				int reserved=rs.getInt("reserved");
 				MovieVO VO = new MovieVO(title,age_limit,movie_time,seat,reserved);
-				mdtos.add(VO);
+				dtos2.add(VO);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return mdtos;
+		return dtos2;
+	}
+
+	public ArrayList<MovieVO> UpdateMovieReserved(String title, String timeSelect, int seatchoice) {
+		String SQL = "update movie set reserved=1 where title=? and movie_time=? and seat=?";
+		try {
+			pstmt=con.prepareStatement(SQL);
+			pstmt.setString(1, title);
+			java.sql.Date date = java.sql.Date.valueOf(timeSelect);
+			pstmt.setDate(2, date);
+			pstmt.setInt(3, seatchoice);
+			pstmt.executeUpdate();
+			System.out.println("예매가 완료되었습니다.");
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dtos2;
 	}
 }
