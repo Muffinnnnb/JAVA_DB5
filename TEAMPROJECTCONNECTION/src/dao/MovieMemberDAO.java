@@ -77,7 +77,7 @@ public class MovieMemberDAO {
 	}
 	
 	public ArrayList<MovieMemberVO> updateMovieMembers(String id,String pw) {
-		String SQL = "update MovieMember id=?,pw=? ";
+		String SQL = "update MovieMember set id=?,pw=? ";
 		try {
 			pstmt = con.prepareStatement(SQL);
 			pstmt.setString(1, id);

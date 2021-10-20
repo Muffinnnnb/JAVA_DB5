@@ -209,23 +209,27 @@ public class Main_Controller {
 				}
 				if (check == false) {
 					System.out.println("아이디 혹은 비밀번호를 다시 확인해주세요.");
-				} else {			
+				} else {
 					System.out.println("새로운 아이디를 입력하세요. >>");
-					id = sc.next();
-					for (int i = 0; i < dtos.size(); i++) {
-						if (dtos.get(i).getID().equals(id)) { // getid와 id가 일치하면
-							System.out.println("현재 사용중인 아이디입니다.");
-							check = true; // check가 true가 되고 break;
-							break;
+					do{
+						check = false;
+						id = sc.next();
+						for (int i = 0; i < dtos.size(); i++) {
+							if (dtos.get(i).getID().equals(id)) { 
+								check=true;
+								System.out.println("현재 사용중인 아이디입니다.");
+								System.out.println("다시 입력하여주십시오. ");
+								break;							
+							}
 						}
-					}
+					}while(check==true);
 					System.out.print("새로운 비밀번호를 입력하세요. >>");
 					pw = sc.next();
 					
 					dtos = service.updateMovieMembers(id, pw);
+					System.out.println("회원정보가 변경되었습니다. ");
+					System.out.println("");
 				}
-
-				break;
 			}
 		}sc.close();
 	}
