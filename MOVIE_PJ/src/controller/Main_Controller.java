@@ -135,11 +135,11 @@ public class Main_Controller {
 						// 영화 예약
 						System.out.println("===== 현재 상영중인 영화 목록 =====");
 						dtos2 = service2.getAllMovie();
-						int j = 1;
+						int j = 1; int num2=0;
 						int k = 1; // j=콘솔창에 보여지는 영화 순서 k=중복되지 않는 영화제목순서
 						for (int i = 1; i < 5; i++) {
 							System.out.print(j + "." + dtos2.get(k).getTitle() + " ");
-							j++;
+							j++; 
 							k += 3;
 						}
 						System.out.println();
@@ -147,7 +147,7 @@ public class Main_Controller {
 						choice = sc.nextInt();
 						System.out.println();
 						if (choice == 1) { // 숫자 입력으로 영화구분
-							title = "인셉션";
+							title ="인셉션";
 						} else if (choice == 2) {
 							title = "킹스맨";
 						} else if (choice == 3) {
@@ -177,8 +177,10 @@ public class Main_Controller {
 										if (seat == 6) { // 콘솔창 줄바꿈
 											System.out.println();
 										}
+										if(seat!=0) { // 더미시트판별
 										System.out.print(" |" + seat + "|");
 									}
+								}
 								}
 							}
 						
