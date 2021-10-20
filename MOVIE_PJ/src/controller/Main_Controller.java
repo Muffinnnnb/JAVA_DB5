@@ -133,6 +133,7 @@ public class Main_Controller {
 						break;
 					case 2:
 						// 영화 예약
+						String[] movie_title=new String[5];
 						int seatchoice=0;
 						String timeSelect="";
 						System.out.println("===== 현재 상영중인 영화 목록 =====");
@@ -141,6 +142,7 @@ public class Main_Controller {
 						int k = 1; // j=콘솔창에 보여지는 영화 순서 k=중복되지 않는 영화제목순서
 						for (int i = 1; i < 5; i++) {
 							System.out.print(j + "." + dtos2.get(k).getTitle() + " ");
+							movie_title[i]=dtos2.get(k).getTitle(); // 영화제목 배열에 getTitle저장
 							j++; 
 							k += 3;
 						}
@@ -148,18 +150,9 @@ public class Main_Controller {
 						System.out.print("예매할 영화의 번호 >>");
 						choice = sc.nextInt();
 						System.out.println();
-						if (choice == 1) { // 숫자 입력으로 영화구분
-							title ="인셉션";
-						} else if (choice == 2) {
-							title = "킹스맨";
-						} else if (choice == 3) {
-							title = "겨울왕국";
-						} else if (choice == 4) {
-							title = "기생충";
-						} else {
-							System.out.println("영화번호를 다시 확인해주세요.");
-							break;
-						}
+						title=movie_title[choice]; 
+						System.out.println(title);
+						
 						for (int i = 0; i < 3; i++) {
 							System.out.println(dtos2.get(i).getMovie_Time().substring(11, 19));
 						} // 시분초만 나오게 문자열을 자름
@@ -189,6 +182,7 @@ public class Main_Controller {
 						
 						}System.out.println("\n");
 						System.out.print("'*'표시가 없는 자리번호를 입력해주세요 >>");
+						timeSelect=timeSelect.substring(11,19);
 						seatchoice=sc.nextInt();
 						dtos2=service2.UpdateMovieReserved(title,timeSelect,seatchoice);
 						
