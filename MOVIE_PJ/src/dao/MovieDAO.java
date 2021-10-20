@@ -6,23 +6,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
-import dto.MovieVO;
-import dto.MovieVO;
 import dto.MovieVO;
 
 public class MovieDAO {
-	private ArrayList<MovieVO> dtos;
+	private ArrayList<MovieVO> mdtos;
 	private Connection con;
 	private Statement st;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
 	public MovieDAO() {
-		dtos = new ArrayList<MovieVO>();
+		mdtos = new ArrayList<MovieVO>();
 		try {
 			String user = "system";
 			String pw = "1234";
@@ -35,39 +31,22 @@ public class MovieDAO {
 		}
 	}
 
-	public ArrayList<MovieVO> getAllTitles() {
-		String SQL = "SELECT * FROM Movie"; // 전체영화조회
+	public ArrayList<MovieVO> getAllMovie() {
+		String SQL = "select * from movie";
 		try {
 			rs = st.executeQuery(SQL);
 			while (rs.next()) {
 				String title = rs.getString("title");
-				int age_limit = rs.getInt("age_limit");
-				String movie_time = rs.getString("movie_time");
-				int seat = rs.getInt("seat");
-				MovieVO VO = new MovieVO(title, age_limit, movie_time, seat);
-				dtos.add(VO);
+				int age_limit=rs.getInt("age_limit");
+				String movie_time=rs.getString("movie_time");
+				int seat=rs.getInt("seat");
+				int reserved=rs.getInt("reserved");
+				MovieVO VO = new MovieVO(title,age_limit,movie_time,seat,reserved);
+				mdtos.add(VO);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return dtos;
+		return mdtos;
 	}
-
-	public ArrayList<MovieVO> insertMovies(String title,int age_limit, String movie_time,int seat) {
-		String SQL = "INSERT INTO Movie (title, age_limit,movie_time,seat) values (?,?,?,?)";
-		try {
-			pstmt = con.prepareStatement(SQL);
-			pstmt.setString(1, title);
-			pstmt.setInt(2, age_limit);
-			pstmt.setString(3, movie_time);
-			pstmt.setInt(4, seat);
-			pstmt.executeUpdate();
-			System.out.println("입력 완료!");
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return dtos;
-	}
-
 }

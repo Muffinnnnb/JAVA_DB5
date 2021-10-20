@@ -29,5 +29,4 @@ public class MovieMemberVO {
 	public int getBorn() {
 		return born;
 	}
-
 }

@@ -24,5 +24,4 @@ public class MovieMemberService {
 	public ArrayList<MovieMemberVO> DeleteMovieMembers(String id) {
 		return dao.deleteMovieMembers(id);
 	}
-
 }
