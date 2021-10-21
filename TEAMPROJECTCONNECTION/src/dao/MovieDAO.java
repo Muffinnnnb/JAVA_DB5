@@ -49,4 +49,18 @@ public class MovieDAO {
 		}
 		return dtos2;
 	}
+	public ArrayList<MovieVO> UpdateMovieReserved(String title, String timeSelect, int seatchoice) {
+		String SQL = "update movie set reserved=1 where title=? and movie_time=TO_DATE(?,'HH24:MI:SS') and seat=?";
+		try {
+			pstmt=con.prepareStatement(SQL);
+			pstmt.setString(1, title);
+			pstmt.setString(2, timeSelect);
+			pstmt.setInt(3, seatchoice);
+			pstmt.executeUpdate();
+			System.out.println("예매가 완료되었습니다.");
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dtos2;
+	}
 }

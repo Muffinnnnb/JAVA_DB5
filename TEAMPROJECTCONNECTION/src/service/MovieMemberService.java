@@ -25,7 +25,7 @@ public class MovieMemberService {
 		return dao.deleteMovieMembers(id);
 	}
 	
-	public ArrayList<MovieMemberVO> updateMovieMembers(String id, String pw) {
-		return dao.updateMovieMembers(id,pw);
+	public ArrayList<MovieMemberVO> updateMovieMembers(String pw,int born,String id) {
+		return dao.updateMovieMembers(pw,born,id);
 	}
 }

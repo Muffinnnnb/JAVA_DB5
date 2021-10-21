@@ -15,4 +15,8 @@ public class MovieService {
 	public ArrayList<MovieVO> getAllMovie() {		
 		return dao.getAllMovie();
 	}
+
+	public ArrayList<MovieVO> UpdateMovieReserved(String title, String timeSelect, int seatchoice) {		
+		return dao.UpdateMovieReserved(title,timeSelect,seatchoice);
+	}
 }
