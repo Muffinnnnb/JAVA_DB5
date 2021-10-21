@@ -76,4 +76,18 @@ public class MovieMemberDAO {
 		return dtos;
 	}
 
+	public ArrayList<MovieMemberVO> updateMovieMembers(String pw, int born, String id) {
+		String SQL = "update MovieMember set pw=?,born=? where id=? ";
+		try {
+			pstmt = con.prepareStatement(SQL);			
+			pstmt.setString(1, pw);
+			pstmt.setInt(2, born);
+			pstmt.setString(3, id);			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dtos;
+	}
+
 }

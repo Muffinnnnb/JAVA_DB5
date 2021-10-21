@@ -24,4 +24,9 @@ public class MovieMemberService {
 	public ArrayList<MovieMemberVO> DeleteMovieMembers(String id) {
 		return dao.deleteMovieMembers(id);
 	}
+
+	public ArrayList<MovieMemberVO> updateMovieMembers(String pw, int born, String id) {
+		// TODO Auto-generated method stub
+		return dao.updateMovieMembers(pw,born,id);
+	}
 }

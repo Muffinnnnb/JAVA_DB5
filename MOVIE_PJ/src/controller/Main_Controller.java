@@ -12,6 +12,7 @@ public class Main_Controller {
 
 	public static void main(String[] args) {
 		boolean check = false;
+		boolean loginCk = false;
 		int choice = 0;
 		int logchoice = 0;
 		String id = "";
@@ -19,6 +20,7 @@ public class Main_Controller {
 		int born = 0;
 		String loginID = "";
 		String title = "";
+		int num = 0;
 		ArrayList<MovieMemberVO> dtos; // 회원정보용
 		ArrayList<MovieVO> dtos2; // 영화정보용
 		MovieMemberService service = new MovieMemberService();
@@ -110,7 +112,7 @@ public class Main_Controller {
 					switch (logchoice) {
 					case 1:
 						// 정보조회
-						int num = 0;
+						num = 0;
 						check = false;
 						System.out.print("비밀번호 입력 >>");
 						pw = sc.next();
@@ -133,26 +135,30 @@ public class Main_Controller {
 						break;
 					case 2:
 						// 영화 예약
-						String[] movie_title=new String[5];
-						int seatchoice=0;
-						String timeSelect="";
+						String[] movie_title = new String[5];
+						int seatchoice = 0;
+						String timeSelect = "";
 						System.out.println("===== 현재 상영중인 영화 목록 =====");
 						dtos2 = service2.getAllMovie();
-						int j = 1; 
+						int j = 1;
 						int k = 1; // j=콘솔창에 보여지는 영화 순서 k=중복되지 않는 영화제목순서
 						for (int i = 1; i < 5; i++) {
 							System.out.print(j + "." + dtos2.get(k).getTitle() + " ");
-							movie_title[i]=dtos2.get(k).getTitle(); // 영화제목 배열에 getTitle저장
-							j++; 
+							movie_title[i] = dtos2.get(k).getTitle(); // 영화제목 배열에 getTitle저장
+							if (dtos2.get(k).getAge_Limit() > dtos.get(num).getBorn()) { // 나이제한 판별
+								System.out.print("해당 영화의 상영등급은 " + dtos2.get(k).getAge_Limit() + "세 이상 관람가능이며\n");
+								System.out.print("회원님의 나이는 " + dtos.get(num).getBorn() + "세 이므로 예매하실 수 없습니다.\n");
+							}
+							j++;
 							k += 3;
 						}
 						System.out.println();
 						System.out.print("예매할 영화의 번호 >>");
 						choice = sc.nextInt();
 						System.out.println();
-						title=movie_title[choice]; 
+						title = movie_title[choice];
 						System.out.println(title);
-						
+
 						for (int i = 0; i < 3; i++) {
 							System.out.println(dtos2.get(i).getMovie_Time().substring(11, 19));
 						} // 시분초만 나오게 문자열을 자름
@@ -165,7 +171,7 @@ public class Main_Controller {
 						for (int i = 0; i < dtos2.size(); i++) {
 							if (dtos2.get(i).getTitle().equals(title)) {
 								if (dtos2.get(i).getMovie_Time().contains(timechoice)) {
-									timeSelect=dtos2.get(i).getMovie_Time(); // timeSelect에 영화시간정보 저장
+									timeSelect = dtos2.get(i).getMovie_Time(); // timeSelect에 영화시간정보 저장
 									if (dtos2.get(i).getReserved() != 0) { // 이미 예약돼있다면 숫자대신 *로 표시
 										System.out.print(" |*|");
 									} else if (dtos2.get(i).getReserved() == 0) {
@@ -173,20 +179,19 @@ public class Main_Controller {
 										if (seat == 6) { // 콘솔창 줄바꿈
 											System.out.println();
 										}
-										if(seat!=0) { // 더미시트판별
-										System.out.print(" |" + seat + "|");
+										if (seat != 0) { // 더미시트판별
+											System.out.print(" |" + seat + "|");
+										}
 									}
 								}
-								}
 							}
-						
-						}System.out.println("\n");
+
+						}
+						System.out.println("\n");
 						System.out.print("'*'표시가 없는 자리번호를 입력해주세요 >>");
-						timeSelect=timeSelect.substring(11,19);
-						seatchoice=sc.nextInt();
-						dtos2=service2.UpdateMovieReserved(title,timeSelect,seatchoice);
-						
-						
+						timeSelect = timeSelect.substring(11, 19);
+						seatchoice = sc.nextInt();
+						dtos2 = service2.UpdateMovieReserved(title, timeSelect, seatchoice);
 
 						break;
 					case 3:
@@ -194,14 +199,107 @@ public class Main_Controller {
 					}
 				}
 				break;
+			case 4:
+				// 회원정보변경
+				check = false;
+				System.out.print("아이디 입력 >>");
+				id = sc.next();
+				System.out.print("비밀번호 입력 >>");
+				pw = sc.next();
+				dtos = service.getAllMembers();
+				for (int i = 0; i < dtos.size(); i++) {
+					if (dtos.get(i).getID().equals(id)) {
+						if (dtos.get(i).getPW().equals(pw)) {
+							check = true;
+						}
+					}
+				}
+				if (check == false) {
+					System.out.println("아이디 혹은 비밀번호를 다시 확인해주세요.");
+				} else {
+					int aNum;
+					do {
+						System.out.println("1.비밀번호변경 2.나이변경");
+						aNum = sc.nextInt();
+
+						if (aNum == 1) {
+							System.out.print("새로운 비밀번호를 입력하세요. >>");
+							pw = sc.next();
+
+							dtos = service.updateMovieMembers(pw, born, id);
+							System.out.println("회원정보가 변경되었습니다. ");
+							System.out.println("");
+
+						} else if (aNum == 2) {
+							System.out.println("나이를 입력하세요. >>");
+							born = sc.nextInt();
+
+							dtos = service.updateMovieMembers(pw, born, id);
+							System.out.println("회원정보가 변경되었습니다. ");
+							System.out.println("");
+						} else {
+							System.out.println("잘못 입력하였습니다.");
+							System.out.println("처음으로 돌아갑니다.");
+							System.out.println("");
+						}
+					} while (aNum != 1 && aNum != 2);
+				}
+				break;
+			case 5:
+				// 영화정보
+				System.out.println("===== 현재 상영중인 영화 목록 =====");
+				dtos2 = service2.getAllMovie();
+				int j = 1;
+				int k = 1; // j=콘솔창에 보여지는 영화 순서 k=중복되지 않는 영화제목순서
+				System.out.print(" ");
+				for (int i = 1; i < 5; i++) {
+					System.out.print(j + "." + dtos2.get(k).getTitle() + "   ");
+					j++;
+					k += 3;
+				}
+				System.out.println();
+				System.out.println();
+				for (int i = 0; i < 3; i++) {
+
+					System.out.print(dtos2.get(i).getMovie_Time().substring(11, 19));
+					System.out.print(" ");
+					System.out.print(dtos2.get(i).getMovie_Time().substring(11, 19));
+					System.out.print("  ");
+					System.out.print(dtos2.get(i).getMovie_Time().substring(11, 19));
+					System.out.print("  ");
+					System.out.println(dtos2.get(i).getMovie_Time().substring(11, 19));
+				} // 시분초만 나오게 문자열을 자름
+
+				System.out.println();
+				System.out.println("영화를 예매하실려면 로그인이필요합니다. ");
+				System.out.println("로그인 하시겠습니까? ");
+				System.out.println("1.로그인 한다. 2.로그인 안한다. ");
+				int logIn = sc.nextInt();
+				// 로그인하면 true로 바꿔서 다시 switch case3으로 넘어가기
+				loginCk = false;
+
+				if (logIn == 1) {
+
+					loginCk = true;
+					choice = 3;
+				} else if (logIn == 2) {
+					System.out.println("종료합니다. ");
+				} else {
+					System.out.println("잘못 입력하였습니다. ");
+					System.out.println("종료합니다. ");
+				}
+				break;
 			}
-		}sc.close();
+		}
+		sc.close();
 	}
 
 	public static void Menu() {
 		System.out.println("1.회원가입");
 		System.out.println("2.탈퇴");
 		System.out.println("3.로그인");
+		System.out.println("4.회원정보변경");
+		System.out.println("5.상영중인 영화정보");
 		System.out.println("0.종료");
 
 	}
@@ -210,5 +308,7 @@ public class Main_Controller {
 		System.out.println();
 		System.out.println("1.회원정보조회");
 		System.out.println("2.영화예매");
+		System.out.println("3.영화예매정보");
+		System.out.println("0.로그아웃");
 	}
 }
