@@ -29,14 +29,15 @@ public class Main_Controller {
 		System.out.println("              영화 예약 프로그램 ");
 		System.out.println("┖                                         ┚");
 
-		while (true) {
+		
 			Menu();
 			choice = sc.nextInt();
-			if (choice == 0) { // 종료
-				break;
-			}
+			
 			do {//영화 정보확인후 로그인하러 돌아갈려고 'do'로 반복
 				switch (choice) {
+				case 0:
+					System.out.println("종료 되었습니다. ");
+					break;
 				case 1:
 					// 회원가입
 					check = false; // 아이디 중복 체크를 위한 bool타입
@@ -195,6 +196,7 @@ public class Main_Controller {
 							break;
 						}
 					}
+										
 					break;
 				case 4:
 				//회원정보변경
@@ -241,6 +243,7 @@ public class Main_Controller {
 							}
 						}while(aNum != 1 && aNum != 2);
 					}
+										
 					break;
 				case 5:
 					//영화정보
@@ -285,10 +288,11 @@ public class Main_Controller {
 						System.out.println("잘못 입력하였습니다. ");
 						System.out.println("종료합니다. ");
 					}
+										
 					break;
 				}
-			}while(loginCk=true);
-		}sc.close();
+			}while(loginCk);
+		sc.close();
 	}
 
 	public static void Menu() {
