@@ -12,7 +12,7 @@ public class Main_Controller {
 
 	public static void main(String[] args) {
 		boolean check = false;
-		boolean loginCk = false;
+		boolean loginCk;
 		int choice = 0;
 		int logchoice = 0;
 		String id = "";
@@ -37,6 +37,8 @@ public class Main_Controller {
 			if (choice == 0) { // 종료
 				break;
 			}
+			do {
+				loginCk=false;
 			switch (choice) {
 			case 1:
 				// 회원가입
@@ -136,7 +138,6 @@ public class Main_Controller {
 						break;
 					case 2:
 						// 영화 예약
-						boolean age_check=false;
 						int movie_age_limit=0;
 						
 						String[] movie_title = new String[5];
@@ -201,16 +202,41 @@ public class Main_Controller {
 									}
 								}
 							}
-
 						}
 						System.out.println("\n");
 						System.out.print("'*'표시가 없는 자리번호를 입력해주세요 >>");
 						timeSelect = timeSelect.substring(11, 19);
 						seatchoice = sc.nextInt();
-						dtos2 = service2.UpdateMovieReserved(title, timeSelect, seatchoice);
+						dtos2 = service2.UpdateMovieReserved(title, timeSelect, seatchoice,loginID);
 
 						break;
 					case 3:
+						//영화예매정보
+						dtos2 = service2.getAllMovie();
+						check=false;
+						System.out.print("비밀번호 입력 >>");
+						sc.next();
+						for(int i=0;i<dtos.size();i++) {
+							if(dtos.get(i).getID().equals(loginID)) {
+								if(dtos.get(i).getPW().equals(pw)) {
+									check=true;							
+								}
+							}
+						}							
+						if(check==true) {
+							System.out.println();
+							System.out.printf("%s님의 예매정보",loginID);
+							System.out.println();
+							
+							for(int i=0;i<dtos2.size();i++) {
+								if(dtos2.get(i).getId().equals(loginID)) {
+									
+									System.out.println("영화 제목 : "+dtos2.get(i).getTitle());
+									System.out.println("영화 시간 : "+dtos2.get(i).getMovie_Time().substring(11,19));
+									System.out.println("좌석 번호 : "+dtos2.get(i).getSeat());
+								}
+							}										
+						}						
 						break;
 					}
 				}
@@ -276,26 +302,20 @@ public class Main_Controller {
 				System.out.println();
 				System.out.println();
 				for (int i = 0; i < 3; i++) {
-
-					System.out.print(dtos2.get(i).getMovie_Time().substring(11, 19));
-					System.out.print(" ");
-					System.out.print(dtos2.get(i).getMovie_Time().substring(11, 19));
-					System.out.print("  ");
-					System.out.print(dtos2.get(i).getMovie_Time().substring(11, 19));
-					System.out.print("  ");
-					System.out.println(dtos2.get(i).getMovie_Time().substring(11, 19));
-				} // 시분초만 나오게 문자열을 자름
+					for (int z = 0;z < 4; z++) {
+						System.out.print(dtos2.get(i).getMovie_Time().substring(11, 19)+"  ");
+					}
+					System.out.println("");
+				} 
 
 				System.out.println();
 				System.out.println("영화를 예매하실려면 로그인이필요합니다. ");
 				System.out.println("로그인 하시겠습니까? ");
-				System.out.println("1.로그인 한다. 2.로그인 안한다. ");
+				System.out.println("1.로그인 한다. 2.로그인 안하고 종료하기. ");
 				int logIn = sc.nextInt();
 				// 로그인하면 true로 바꿔서 다시 switch case3으로 넘어가기
-				loginCk = false;
-
+				
 				if (logIn == 1) {
-
 					loginCk = true;
 					choice = 3;
 				} else if (logIn == 2) {
@@ -306,6 +326,7 @@ public class Main_Controller {
 				}
 				break;
 			}
+			}while(loginCk);
 		}
 		sc.close();
 	}

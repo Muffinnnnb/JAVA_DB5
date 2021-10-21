@@ -43,7 +43,8 @@ public class MovieDAO {
 				String movie_time=rs.getString("movie_time");
 				int seat=rs.getInt("seat");
 				int reserved=rs.getInt("reserved");
-				MovieVO VO = new MovieVO(title,age_limit,movie_time,seat,reserved);
+				String id=rs.getString("id");
+				MovieVO VO = new MovieVO(title,age_limit,movie_time,seat,reserved,id);
 				dtos2.add(VO);
 			}
 		} catch (SQLException e) {
@@ -52,13 +53,14 @@ public class MovieDAO {
 		return dtos2;
 	}
 
-	public ArrayList<MovieVO> UpdateMovieReserved(String title, String timeSelect, int seatchoice) {
-		String SQL = "update movie set reserved=1 where title=? and movie_time=TO_DATE(?,'HH24:MI:SS') and seat=?";
+	public ArrayList<MovieVO> UpdateMovieReserved(String title, String timeSelect, int seatchoice,String loginID) {
+		String SQL = "update movie set reserved=1,id=? where title=? and movie_time=TO_DATE(?,'HH24:MI:SS') and seat=?";
 		try {
 			pstmt=con.prepareStatement(SQL);
-			pstmt.setString(1, title);
-			pstmt.setString(2, timeSelect);
-			pstmt.setInt(3, seatchoice);
+			pstmt.setString(1, loginID);
+			pstmt.setString(2, title);
+			pstmt.setString(3, timeSelect);
+			pstmt.setInt(4, seatchoice);
 			pstmt.executeUpdate();
 			System.out.println("예매가 완료되었습니다.");
 		}catch (SQLException e) {
