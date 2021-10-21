@@ -27,12 +27,12 @@ public class MovieMemberDAO {
 			con = DriverManager.getConnection(url, user, pw);
 			st = con.createStatement();
 		} catch (Exception e) {
-			System.out.println("데이터베이스 연결 오류:" + e.getMessage());
+			System.out.println("�����ͺ��̽� ���� ����:" + e.getMessage());
 		}
 	}
 
 	public ArrayList<MovieMemberVO> getAllMembers() {
-		String SQL = "SELECT * FROM MovieMember"; // 전체회원조회
+		String SQL = "SELECT * FROM MovieMember"; // ��üȸ����ȸ
 		try {
 			rs = st.executeQuery(SQL);
 			while (rs.next()) {
@@ -56,7 +56,7 @@ public class MovieMemberDAO {
 			pstmt.setString(2, pw);
 			pstmt.setInt(3, born);
 			pstmt.executeUpdate();
-			System.out.println("가입 완료!");
+			System.out.println("���� �Ϸ�!");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -75,8 +75,8 @@ public class MovieMemberDAO {
 		}
 		return dtos;
 	}
-	
-	public ArrayList<MovieMemberVO> updateMovieMembers(String pw,int born,String id) {
+
+	public ArrayList<MovieMemberVO> updateMovieMembers(String pw, int born, String id) {
 		String SQL = "update MovieMember set pw=?,born=? where id=? ";
 		try {
 			pstmt = con.prepareStatement(SQL);			

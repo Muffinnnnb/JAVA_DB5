@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dto.MovieVO;
 
@@ -27,7 +29,7 @@ public class MovieDAO {
 			con = DriverManager.getConnection(url, user, pw);
 			st = con.createStatement();
 		} catch (Exception e) {
-			System.out.println("\"데이터베이스 연결 오류:" + e.getMessage());
+			System.out.println("�����ͺ��̽� ���� ����:" + e.getMessage());
 		}
 	}
 
@@ -49,6 +51,7 @@ public class MovieDAO {
 		}
 		return dtos2;
 	}
+
 	public ArrayList<MovieVO> UpdateMovieReserved(String title, String timeSelect, int seatchoice) {
 		String SQL = "update movie set reserved=1 where title=? and movie_time=TO_DATE(?,'HH24:MI:SS') and seat=?";
 		try {
@@ -57,7 +60,7 @@ public class MovieDAO {
 			pstmt.setString(2, timeSelect);
 			pstmt.setInt(3, seatchoice);
 			pstmt.executeUpdate();
-			System.out.println("예매가 완료되었습니다.");
+			System.out.println("���Ű� �Ϸ�Ǿ����ϴ�.");
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
