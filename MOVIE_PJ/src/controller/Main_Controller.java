@@ -21,6 +21,7 @@ public class Main_Controller {
 		String loginID = "";
 		String title = "";
 		int num = 0;
+		int member_age=0;
 		ArrayList<MovieMemberVO> dtos; // 회원정보용
 		ArrayList<MovieVO> dtos2; // 영화정보용
 		MovieMemberService service = new MovieMemberService();
@@ -135,6 +136,9 @@ public class Main_Controller {
 						break;
 					case 2:
 						// 영화 예약
+						boolean age_check=false;
+						int movie_age_limit=0;
+						
 						String[] movie_title = new String[5];
 						int seatchoice = 0;
 						String timeSelect = "";
@@ -145,10 +149,6 @@ public class Main_Controller {
 						for (int i = 1; i < 5; i++) {
 							System.out.print(j + "." + dtos2.get(k).getTitle() + " ");
 							movie_title[i] = dtos2.get(k).getTitle(); // 영화제목 배열에 getTitle저장
-							if (dtos2.get(k).getAge_Limit() > dtos.get(num).getBorn()) { // 나이제한 판별
-								System.out.print("해당 영화의 상영등급은 " + dtos2.get(k).getAge_Limit() + "세 이상 관람가능이며\n");
-								System.out.print("회원님의 나이는 " + dtos.get(num).getBorn() + "세 이므로 예매하실 수 없습니다.\n");
-							}
 							j++;
 							k += 3;
 						}
@@ -158,6 +158,22 @@ public class Main_Controller {
 						System.out.println();
 						title = movie_title[choice];
 						System.out.println(title);
+						
+						for(int i=0;i<dtos2.size();i++) {
+							if(dtos2.get(i).getTitle()==title)
+								movie_age_limit=dtos2.get(i).getAge_Limit(); //movie_age_limit에 제한나이를 저장
+						}
+						
+						for(int i=0;i<dtos.size();i++) {
+							if(dtos.get(i).getID().equals(loginID))
+								member_age=dtos.get(i).getBorn(); // member_age에 회원 나이를 저장
+						}
+						
+						if(movie_age_limit>member_age) {
+							System.out.print("해당 영화의 상영등급은 "+movie_age_limit+"세 이상 관람가능이며\n");
+							System.out.print("회원님의 나이는 "+member_age+"세 이므로 예매하실 수 없습니다.\n");
+							break;
+						}
 
 						for (int i = 0; i < 3; i++) {
 							System.out.println(dtos2.get(i).getMovie_Time().substring(11, 19));
