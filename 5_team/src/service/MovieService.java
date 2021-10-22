@@ -7,20 +7,16 @@ import dto.MovieVO;
 
 public class MovieService {
 	private MovieDAO dao;
-
-	public MovieService() {
+	
+	public MovieService(){
 		dao = new MovieDAO();
 	}
 
-	public ArrayList<MovieVO> getAllTitles() {
-
-		return dao.getAllTitles();
+	public ArrayList<MovieVO> getAllMovie() {		
+		return dao.getAllMovie();
 	}
 
-	public ArrayList<MovieVO> insertMovies(String title,int age_limit, String movie_time,int seat) {
-		return dao.insertMovies(title, age_limit,movie_time,seat);
+	public ArrayList<MovieVO> UpdateMovieReserved(String title, String timeSelect, int seatchoice,String loginID) {		
+		return dao.UpdateMovieReserved(title,timeSelect,seatchoice,loginID);
 	}
-
-
-
 }

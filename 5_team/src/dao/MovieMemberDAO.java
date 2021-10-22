@@ -6,12 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
-import dto.MovieMemberVO;
-import dto.MovieMemberVO;
 import dto.MovieMemberVO;
 
 public class MovieMemberDAO {
@@ -26,7 +22,7 @@ public class MovieMemberDAO {
 		try {
 			String user = "system";
 			String pw = "1234";
-			String url = "jdbc:oracle:thin:@localhost:1521:XE";
+			String url = "jdbc:oracle:thin:@cyzhsss.iptime.org:1521:XE";
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			con = DriverManager.getConnection(url, user, pw);
 			st = con.createStatement();
@@ -36,6 +32,7 @@ public class MovieMemberDAO {
 	}
 
 	public ArrayList<MovieMemberVO> getAllMembers() {
+		dtos = new ArrayList<MovieMemberVO>();// dtos 초기화
 		String SQL = "SELECT * FROM MovieMember"; // 전체회원조회
 		try {
 			rs = st.executeQuery(SQL);
@@ -79,4 +76,19 @@ public class MovieMemberDAO {
 		}
 		return dtos;
 	}
+
+	public ArrayList<MovieMemberVO> updateMovieMembers(String pw, int born, String id) {
+		String SQL = "update MovieMember set pw=?,born=? where id=? ";
+		try {
+			pstmt = con.prepareStatement(SQL);			
+			pstmt.setString(1, pw);
+			pstmt.setInt(2, born);
+			pstmt.setString(3, id);			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dtos;
+	}
+
 }

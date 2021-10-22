@@ -11,22 +11,20 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import dto.MovieVO;
-import dto.MovieVO;
-import dto.MovieVO;
 
 public class MovieDAO {
-	private ArrayList<MovieVO> dtos;
+	private ArrayList<MovieVO> dtos2;
 	private Connection con;
 	private Statement st;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
 	public MovieDAO() {
-		dtos = new ArrayList<MovieVO>();
+		dtos2 = new ArrayList<MovieVO>();
 		try {
 			String user = "system";
 			String pw = "1234";
-			String url = "jdbc:oracle:thin:@localhost:1521:XE";
+			String url = "jdbc:oracle:thin:@cyzhsss.iptime.org:1521:XE";
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			con = DriverManager.getConnection(url, user, pw);
 			st = con.createStatement();
@@ -35,39 +33,40 @@ public class MovieDAO {
 		}
 	}
 
-	public ArrayList<MovieVO> getAllTitles() {
-		String SQL = "SELECT * FROM Movie"; // 전체영화조회
+	public ArrayList<MovieVO> getAllMovie() {
+		dtos2 = new ArrayList<MovieVO>();// dtos2 초기화
+		String SQL = "select * from movie";
 		try {
 			rs = st.executeQuery(SQL);
 			while (rs.next()) {
 				String title = rs.getString("title");
-				int age_limit = rs.getInt("age_limit");
-				String movie_time = rs.getString("movie_time");
-				int seat = rs.getInt("seat");
-				MovieVO VO = new MovieVO(title, age_limit, movie_time, seat);
-				dtos.add(VO);
+				int age_limit=rs.getInt("age_limit");
+				String movie_time=rs.getString("movie_time");
+				int seat=rs.getInt("seat");
+				int reserved=rs.getInt("reserved");
+				String id=rs.getString("id");
+				MovieVO VO = new MovieVO(title,age_limit,movie_time,seat,reserved,id);
+				dtos2.add(VO);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return dtos;
+		return dtos2;
 	}
 
-	public ArrayList<MovieVO> insertMovies(String title,int age_limit, String movie_time,int seat) {
-		String SQL = "INSERT INTO Movie (title, age_limit,movie_time,seat) values (?,?,?,?)";
+	public ArrayList<MovieVO> UpdateMovieReserved(String title, String timeSelect, int seatchoice,String loginID) {
+		String SQL = "update movie set reserved=1,id=? where title=? and movie_time=TO_DATE(?,'HH24:MI:SS') and seat=?";
 		try {
-			pstmt = con.prepareStatement(SQL);
-			pstmt.setString(1, title);
-			pstmt.setInt(2, age_limit);
-			pstmt.setString(3, movie_time);
-			pstmt.setInt(4, seat);
+			pstmt=con.prepareStatement(SQL);
+			pstmt.setString(1, loginID);
+			pstmt.setString(2, title);
+			pstmt.setString(3, timeSelect);
+			pstmt.setInt(4, seatchoice);
 			pstmt.executeUpdate();
-			System.out.println("입력 완료!");
-
-		} catch (SQLException e) {
+			System.out.println("예매가 완료되었습니다.");
+		}catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return dtos;
+		return dtos2;
 	}
-
 }
