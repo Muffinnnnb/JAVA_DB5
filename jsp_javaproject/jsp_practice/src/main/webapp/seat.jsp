@@ -19,17 +19,11 @@ MovieService service2 = new MovieService();
 <% 
 String title = request.getParameter("title");
 String time = request.getParameter("time");
-String time2 = "12";
-
-dtos2 = service2.ViewMovie(time);
-for(int i =0;i<10;i++){
-	out.println(i);
-}
 
 for(int i = 0;i<dtos2.size();i++){
 	out.println("영화제목:"+dtos2.get(i).getTitle());
 }
-out.print("바보");
+
 %>
 
 <%=title %><%=time %>
