@@ -7,6 +7,7 @@ public class MovieVO {
 	private int seat;
 	private int reserved;
 	private String id;
+	private String poster;
 	
 	public MovieVO(String title, int age_limit, String movie_time, int seat, int reserved, String id) {
 		this.title=title;
@@ -16,6 +17,10 @@ public class MovieVO {
 		this.reserved=reserved;
 		this.id=id;
 	}
+	public MovieVO(String poster) {
+		this.poster=poster;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -34,4 +39,8 @@ public class MovieVO {
 	public String getId() {
 		return id;
 	}
+	public String getPoster() {
+		return poster;
+	}
+	
 }

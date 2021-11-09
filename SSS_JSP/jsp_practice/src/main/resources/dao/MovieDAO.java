@@ -53,6 +53,24 @@ public class MovieDAO {
 		}
 		return dtos2;
 	}
+	
+	public ArrayList<MovieVO> getAllMoviePoster() {
+		dtos2 = new ArrayList<MovieVO>();// dtos2 √ ±‚»≠
+		String SQL = "select poster from movie WHERE TO_CHAR(movie_time,'hh24:mi:ss') = '12:00:00' and seat='0'";
+		try {
+			rs = st.executeQuery(SQL);
+			while (rs.next()) {
+				String poster = rs.getString("poster");
+				MovieVO VO = new MovieVO(poster);
+				dtos2.add(VO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dtos2;
+	}
+	
+	
 
 	public ArrayList<MovieVO> UpdateMovieReserved(String title, String timeSelect, int seatchoice,String loginID) {
 		String SQL = "update movie set reserved=1,id=? where title=? and movie_time=TO_DATE(?,'HH24:MI:SS') and seat=?";

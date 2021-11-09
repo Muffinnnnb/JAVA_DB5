@@ -19,4 +19,9 @@ public class MovieService {
 	public ArrayList<MovieVO> UpdateMovieReserved(String title, String timeSelect, int seatchoice,String loginID) {		
 		return dao.UpdateMovieReserved(title,timeSelect,seatchoice,loginID);
 	}
+	
+	public ArrayList<MovieVO> getAllMoviePoster(){
+		return dao.getAllMoviePoster();
+	}
+	
 }

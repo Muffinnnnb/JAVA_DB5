@@ -30,7 +30,12 @@ public class Main_Controller {
 		System.out.println("┏                                         ┒");
 		System.out.println("              영화 예약 프로그램 ");
 		System.out.println("┖                                         ┚");
-
+		
+		
+		dtos2= service2. getAllMoviePoster();
+		System.out.println(dtos2.size());
+		String str= dtos2.get(0).getPoster();
+		System.out.println(str);
 		while (true) {
 			Menu();
 			choice = sc.nextInt();

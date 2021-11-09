@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+
+<%@ page import="java.util.ArrayList, java.util.Scanner,
+dto.MovieMemberVO,
+ dto.MovieVO,
+ service.MovieMemberService,
+ service.MovieService" %>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +20,17 @@
 </style>
 </head>
 <body>
+
+<%
+ArrayList<MovieVO> dtos2; // 영화정보용
+MovieService service2 = new MovieService();
+dtos2= service2.getAllMoviePoster();	//영화 포스터 가져오는 명령어
+
+
+
+%>
+
+
 	<div id="wrap">
 	<div style="text-align: right">
 	<%Object userId = session.getAttribute("userId");%>
@@ -31,10 +49,8 @@
 			<hr>
 		</div>
 		<h2 style="text-align: center">상영중인 영화</h2>
-		<div class="view">
-			<img src="common.jfif">&nbsp;<img src="common.jfif">&nbsp;<img
-				src="common.jfif">&nbsp;<img src="common.jfif">&nbsp;<img
-				src="common.jfif">
+		<div class="view">					<!-- DB에서 영화 포스터 URL 가져오고 소스로 활용 -->
+			<img src="<%=dtos2.get(0).getPoster()%>" width="169" height="242">&nbsp;<img src="<%=dtos2.get(1).getPoster()%>" width="169" height="242">&nbsp;<img src="<%=dtos2.get(2).getPoster()%>" width="169" height="242">&nbsp;<img src="<%=dtos2.get(3).getPoster()%>" width="169" height="242">&nbsp;<img src="<%=dtos2.get(0).getPoster()%>" width="169" height="242">
 			<hr>
 		</div>
 		<br>
