@@ -70,9 +70,10 @@ public class MovieDAO {
 		return dtos2;
 	}
 	
-	public ArrayList<MovieVO> ViewMovie(String time) {
+	public ArrayList<MovieVO> ViewMovie(String Title,String time) {
 		dtos2 = new ArrayList<MovieVO>();
-		String SQL = "select * from movie where like '"+time+"%'";
+		String SQL = "select * from movie where to_char(movie_time,'yyyy-mm-dd hh24') = '2021-10-01 "+time+"'"
+					+ " and reserved=0 and title='"+Title+"'";
 		try {
 			rs = st.executeQuery(SQL);
 			while (rs.next()) {
