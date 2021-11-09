@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>login</title>
 </head>
 <body>
 <%
@@ -22,7 +22,16 @@ String password=request.getParameter("password");
 			response.sendRedirect("./movie.jsp");
 		} else {
 			System.out.println("로그인 실패!");
-			response.sendRedirect("./index.jsp");
+%>
+	<script>
+	alert("ID와 비밀번호를 다시 확인해 주세요.");
+	history.back();
+	</script>
+
+
+
+<%
+			//response.sendRedirect("./index.jsp");
 		}
 %>
 </body>

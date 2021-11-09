@@ -45,7 +45,7 @@ dtos2= service2.getAllMoviePoster();	//영화 포스터 가져오는 명령어
 	</div>
 		<h1 style="text-align: center">추천영화</h1>
 		<div class="view">
-			<img src="common.jfif">&nbsp;<img src="common.jfif">
+			<img src="<%=dtos2.get(0).getPoster()%>" width="169" height="242">&nbsp;<img src="<%=dtos2.get(1).getPoster()%>" width="169" height="242">
 			<hr>
 		</div>
 		<h2 style="text-align: center">상영중인 영화</h2>

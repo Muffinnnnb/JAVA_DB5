@@ -59,7 +59,7 @@
 					계정이 없으신가요? <a href="./signup.jsp">회원가입</a>
 				</div>
 				<div class="d-flex justify-content-center">
-					<!-- <a href="#">비밀번호를 잊으셨나요?</a> -->
+					<a href="./index.jsp">Home</a>
 				</div>
 			</div>
 		</div>
