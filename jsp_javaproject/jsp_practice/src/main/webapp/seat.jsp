@@ -1,32 +1,43 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ page import="dao.MovieDAO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="dto.MovieVO" %>
-<%@ page import="service.MovieService" %>
+<%@ page import="dao.MovieDAO" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<h1 style="text-align:center">ÀÚ¸®¸¦ ¼±ÅÃÇÏ¼¼¿ä.</h1>
-<%!
+<h1 style="text-align:center">ìë¦¬ë¥¼ ì„ íƒí•˜ì„¸ìš”.</h1>
+
+<%
+MovieDAO dao2 = new MovieDAO();
 ArrayList<MovieVO> dtos2;
-MovieService service2 = new MovieService();
-%>
-<% 
+
+request.setCharacterEncoding("UTF-8");
 String title = request.getParameter("title");
 String time = request.getParameter("time");
 
-for(int i = 0;i<dtos2.size();i++){
-	out.println("¿µÈ­Á¦¸ñ:"+dtos2.get(i).getTitle());
+%>
+<%=title %><%=time %>
+<%
+dtos2= dao2.ViewMovie(title,time);
+for(int i =0;i<dtos2.size();i++){
+	MovieVO arr = dtos2.get(i);
+	String Title = arr.getTitle();
+	int age= arr.getAge_Limit();
+	String Time =arr.getMovie_Time();
+	
+	out.println("ì œëª©: "+Title+"<br>");
+	out.println("ë‚˜ì´ì œí•œ: "+age+"<br>");
+	out.println("ì‹œê°„: "+Time+"<br><br>");
 }
-
 %>
 
-<%=title %><%=time %>
 
 </body>
 </html>
