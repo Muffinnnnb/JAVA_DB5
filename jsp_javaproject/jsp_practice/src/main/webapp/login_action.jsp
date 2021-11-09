@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="dao.MemberDAO" %>
+<%@ page import="dao.MovieMemberDAO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +11,7 @@
 <%
 String userId=request.getParameter("userId");
 String password=request.getParameter("password");
-
-
-		MemberDAO dao=new MemberDAO();
+		MovieMemberDAO dao=new MovieMemberDAO();
 		boolean result=dao.memberSelect(userId,password);
 		
 		if(result==true){

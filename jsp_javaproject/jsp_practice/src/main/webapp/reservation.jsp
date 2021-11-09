@@ -1,16 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-г╔╦╕ ╠╦ютго╫г╥а╦И ╥н╠вюнюл гй©Дгу╢о╢ы.<br>
-<button onClick="document.location.href='login.jsp'">╥н╠вюнго╠Б</button><br>
-<button onClick="document.location.href='index.jsp'">х╦©Ь╟║ютго╠Б</button><br>
-<button onClick="document.location.href='index.jsp'">цК╪рго╠Б</button><br>
+М▒°К╔╪ Й╣╛Л·┘М∙≤Л▀╓К═╓К╘╢ К║°Й╥╦Л²╦Л²╢ М∙└Л ■М∙╘К▀┬К▀╓.<br>
+<button onClick="document.location.href='login.jsp'">К║°Й╥╦Л²╦М∙≤Й╦╟</button><br>
+<button onClick="document.location.href='index.jsp'">М ▄Л⌡░Й╟─Л·┘М∙≤Й╦╟</button><br>
+<button onClick="document.location.href='index.jsp'">Л╥╗Л├▄М∙≤Й╦╟</button><br>
 
 </body>
 </html>

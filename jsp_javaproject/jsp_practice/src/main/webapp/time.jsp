@@ -12,8 +12,7 @@
 request.setCharacterEncoding("UTF-8");
 String title = request.getParameter("title");
 %>
-<%=title%>
-<%=title%>
+
 	<h1 style="text-align:center">시간을 선택하세요.</h1>
 
 <form action="seat.jsp" method="post">

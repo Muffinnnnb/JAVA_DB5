@@ -22,9 +22,6 @@ request.setCharacterEncoding("UTF-8");
 String title = request.getParameter("title");
 String time = request.getParameter("time");
 
-%>
-<%=title %><%=time %>
-<%
 dtos2= dao2.ViewMovie(title,time);
 for(int i =0;i<dtos2.size();i++){
 	MovieVO arr = dtos2.get(i);
