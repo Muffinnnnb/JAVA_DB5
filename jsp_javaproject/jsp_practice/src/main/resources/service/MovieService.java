@@ -20,7 +20,7 @@ public class MovieService {
 		return dao.UpdateMovieReserved(title,timeSelect,seatchoice,loginID);
 	}
 	
-	public ArrayList<MovieVO> ViewMovie(String time){
-		return dao.ViewMovie(time);
+	public ArrayList<MovieVO> ViewMovie(String title,String time) {		
+		return dao.ViewMovie(title,time);
 	}
 }
