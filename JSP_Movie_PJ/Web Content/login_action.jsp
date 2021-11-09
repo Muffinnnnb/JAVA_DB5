@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="dao.MemberDAO" %>
+<%@ page import="dao.MovieMemberDAO" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>login</title>
 </head>
 <body>
 <%
 String userId=request.getParameter("userId");
 String password=request.getParameter("password");
-		MemberDAO dao=new MemberDAO();
+		MovieMemberDAO dao=new MovieMemberDAO();
 		boolean result=dao.memberSelect(userId,password);
 		
 		if(result==true){
@@ -20,7 +20,16 @@ String password=request.getParameter("password");
 			response.sendRedirect("./index.jsp");
 		} else {
 			System.out.println("로그인 실패!");
-			response.sendRedirect("./index.jsp");
+%>
+	<script>
+	alert("ID와 비밀번호를 다시 확인해 주세요.");
+	history.back();
+	</script>
+
+
+
+<%
+			//response.sendRedirect("./index.jsp");
 		}
 %>
 </body>

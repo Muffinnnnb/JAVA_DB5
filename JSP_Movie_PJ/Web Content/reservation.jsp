@@ -14,7 +14,7 @@
 	<br>
 	<button onClick="document.location.href='login.jsp'">로그인하기</button>
 	<br>
-	<button onClick="document.location.href='SignUp.html'">회원가입하기</button>
+	<button onClick="document.location.href='SignUp.jsp'">회원가입하기</button>
 	<br>
 	<button onClick="document.location.href='index.jsp'">취소하기</button>
 	<br>
