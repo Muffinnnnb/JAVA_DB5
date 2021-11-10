@@ -51,9 +51,11 @@ dtos2= service2.getAllMoviePoster();	//영화 포스터 가져오는 명령어
 			<hr>
 		</div>
 		<br>
-		<button onClick="document.location.href='reservation.jsp'">예매하러가기</button>
+	<%if(userId!=null) {%>
+		<button onClick="document.location.href='movie.jsp'">예매하러가기</button>
+	<%} %>
+		<button onClick="document.location.href='search.jsp'">영화 검색</button>
 		<br>
-
 	</div>
 </body>
 </html>
