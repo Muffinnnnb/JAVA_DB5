@@ -21,6 +21,16 @@ public class MovieVO {
 		this.poster=poster;
 	}
 	
+	public MovieVO(String title,int age_limit,String movie_time,int seat,int reserved,String id,String poster) {
+		this.title=title;
+		this.age_limit=age_limit;
+		this.movie_time=movie_time;
+		this.seat=seat;
+		this.reserved=reserved;
+		this.id=id;
+		this.poster=poster;
+	}
+	
 	public String getTitle() {
 		return title;
 	}

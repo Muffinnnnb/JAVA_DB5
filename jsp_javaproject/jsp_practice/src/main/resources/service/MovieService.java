@@ -27,4 +27,13 @@ public class MovieService {
 	public ArrayList<MovieVO> ViewMovie(String title,String time) {		
 		return dao.ViewMovie(title,time);
 	}
+	
+	public ArrayList<MovieVO> getMovieSearch(String search) {		
+		return dao.getMovieSearch(search);
+	}
+
+	public ArrayList<MovieVO> getAllMovieSearch(){
+		return dao.getAllMovieSearch();
+	}
+
 }
