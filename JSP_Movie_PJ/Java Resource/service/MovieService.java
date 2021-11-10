@@ -24,4 +24,16 @@ public class MovieService {
 		return dao.getAllMoviePoster();
 	}
 	
+	public ArrayList<MovieVO> ViewMovie(String title,String time) {		
+		return dao.ViewMovie(title,time);
+	}
+	
+	public ArrayList<MovieVO> getMovieSearch(String search) {		
+		return dao.getMovieSearch(search);
+	}
+
+	public ArrayList<MovieVO> getAllMovieSearch(){
+		return dao.getAllMovieSearch();
+	}
+	
 }

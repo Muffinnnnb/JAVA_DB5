@@ -7,7 +7,7 @@
 <title>정보 수정</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <style>
-#input_form{display:inline-black; padding:25px; border:1px solid black;}
+#input_form{display:inline-black; padding:35px; border:1px solid black;max-width:500px;}
 </style>
 </head>
 <body>
@@ -15,7 +15,7 @@
  String userId = request.getParameter("userId");
  
  %>
- 
+ <div style="padding:50px;">
  <div id="input_form";>
 <form method="post" action="./MyinfoUpdateAction.jsp?userId=<%=userId%>">
 <br>
@@ -31,6 +31,7 @@
   </div>
   <div style="text-align:right;">
   <button type="submit" class="btn btn-outline-dark">수정</button>
+  </div>
   </div>
 </form>
 </div>

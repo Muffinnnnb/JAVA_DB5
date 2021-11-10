@@ -1,16 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, java.util.Scanner,
+dto.MovieMemberVO,
+ dto.MovieVO,
+ service.MovieMemberService,
+ service.MovieService" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+<%
+ArrayList<MovieVO> dtos2;
+ArrayList<MovieVO> dtos3;
+MovieService service2 = new MovieService();
+MovieService service3 = new MovieService();
+dtos2= service2.getAllMoviePoster();
+dtos3= service3.getAllMovieSearch();
+String title="";
+int age=0;
+for(int i=0;i<4;i++){
+	title = dtos3.get(i).getTitle();
+	age = dtos3.get(i).getAge_Limit();
+%>
 <div>
-	<h1 style="text-align:center">øπ∏≈«“ øµ»≠∏¶ º±≈√«ÿ¡÷ººø‰.</h1>
-	<a href="https://naver.com"><img src="common.jfif"></a>
+<%if(age!=0) {%>
+	<b><%=title %>&nbsp;<%=age %>ÏÑ∏ Ïù¥Ïö©Í∞Ä</b><br>
+<%}else{ %>
+	<b><%=title %>&nbsp;Î™®Îì† Ïó∞Î†π ÏãúÏ≤≠Í∞ÄÎä•</b><br>
+<%} %>
+	<img src="<%=dtos2.get(i).getPoster()%>" width="169" height="242">
+	<form action="time.jsp" method="post">
+	<input type="hidden" name="title" value="<%=title%>">
+	<input type="submit" value="ÏãúÍ∞ÑÎ≥¥Í∏∞">
+	</form>
 </div>
-	
+<%}
+%>
+
 </body>
 </html>

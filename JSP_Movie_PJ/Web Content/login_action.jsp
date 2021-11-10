@@ -17,7 +17,7 @@ String password=request.getParameter("password");
 		if(result==true){
 			System.out.println("로그인 성공!");
 			session.setAttribute("userId", userId);
-			response.sendRedirect("./index.jsp");
+			response.sendRedirect("movie.jsp");
 		} else {
 			System.out.println("로그인 실패!");
 %>
@@ -25,8 +25,6 @@ String password=request.getParameter("password");
 	alert("ID와 비밀번호를 다시 확인해 주세요.");
 	history.back();
 	</script>
-
-
 
 <%
 			//response.sendRedirect("./index.jsp");

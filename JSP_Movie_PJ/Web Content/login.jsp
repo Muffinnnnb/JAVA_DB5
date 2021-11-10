@@ -56,7 +56,7 @@
 			</div>
 			<div class="card-footer">
 				<div class="d-flex justify-content-center links">
-					계정이 없으신가요? <a href="./signup.jsp">회원가입</a>
+					계정이 없으신가요? <a href="./SignUp.jsp">회원가입</a>
 				</div>
 				<div class="d-flex justify-content-center">
 					<a href="./index.jsp">Home</a>
