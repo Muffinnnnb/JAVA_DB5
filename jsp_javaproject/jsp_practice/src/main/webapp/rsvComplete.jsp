@@ -32,5 +32,9 @@ String id = (String)session.getAttribute("userId");
 MovieDAO dao2 = new MovieDAO();
 dao2.UpdateReservation(id, title, time, seat);
 %>
+<form action="index.jsp" method="post">
+	<input type="submit" value="홈으로">
+</form>
+
 </body>
 </html>
