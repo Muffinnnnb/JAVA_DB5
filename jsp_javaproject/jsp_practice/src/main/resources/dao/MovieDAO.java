@@ -34,7 +34,7 @@ public class MovieDAO {
 	}
 
 	public ArrayList<MovieVO> getAllMovie() {
-		dtos2 = new ArrayList<MovieVO>();
+		dtos2 = new ArrayList<MovieVO>();// dtos2 초기화
 		String SQL = "select * from movie";
 		try {
 			rs = st.executeQuery(SQL);
@@ -53,6 +53,24 @@ public class MovieDAO {
 		}
 		return dtos2;
 	}
+	
+	public ArrayList<MovieVO> getAllMoviePoster() {
+		dtos2 = new ArrayList<MovieVO>();// dtos2 초기화
+		String SQL = "select poster from movie WHERE TO_CHAR(movie_time,'hh24:mi:ss') = '12:00:00' and seat='0'";
+		try {
+			rs = st.executeQuery(SQL);
+			while (rs.next()) {
+				String poster = rs.getString("poster");
+				MovieVO VO = new MovieVO(poster);
+				dtos2.add(VO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dtos2;
+	}
+	
+	
 
 	public ArrayList<MovieVO> UpdateMovieReserved(String title, String timeSelect, int seatchoice,String loginID) {
 		String SQL = "update movie set reserved=1,id=? where title=? and movie_time=TO_DATE(?,'HH24:MI:SS') and seat=?";
@@ -73,7 +91,8 @@ public class MovieDAO {
 	public ArrayList<MovieVO> ViewMovie(String Title,String time) {
 		dtos2 = new ArrayList<MovieVO>();
 		String SQL = "select * from movie where to_char(movie_time,'yyyy-mm-dd hh24') = '2021-10-01 "+time+"'"
-					+ " and reserved=0 and title='"+Title+"'";
+					+ " and reserved=0 and title='"+Title+"'"
+					+ " and seat != 0 order by seat asc";
 		try {
 			rs = st.executeQuery(SQL);
 			while (rs.next()) {
@@ -90,5 +109,16 @@ public class MovieDAO {
 			e.printStackTrace();
 		}
 		return dtos2;
+	}
+	
+	public void UpdateReservation(String id,String title,String time,String seat){
+		String SQL = "update movie set reserved=1,id='"+id+"' where title='"+title+"'"
+				+ " and to_char(movie_time,'yyyy-mm-dd hh24') = '2021-10-01 "+time+"' and seat="+seat;
+		try {
+			pstmt=con.prepareStatement(SQL);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

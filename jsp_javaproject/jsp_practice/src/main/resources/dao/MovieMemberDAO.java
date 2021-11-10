@@ -117,8 +117,5 @@ public class MovieMemberDAO {
 		
 		return false;
 	}
-	
-	
-	
 
 }
