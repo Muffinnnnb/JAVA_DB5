@@ -20,6 +20,10 @@ public class MovieService {
 		return dao.UpdateMovieReserved(title,timeSelect,seatchoice,loginID);
 	}
 	
+	public ArrayList<MovieVO> getAllMoviePoster(){
+		return dao.getAllMoviePoster();
+	}
+	
 	public ArrayList<MovieVO> ViewMovie(String title,String time) {		
 		return dao.ViewMovie(title,time);
 	}
