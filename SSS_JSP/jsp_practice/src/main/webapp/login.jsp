@@ -3,9 +3,7 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-
-		
+<head>		
 
 	<title>Login Page</title>
    <!--Made with love by Mutiullah Samim -->
@@ -67,6 +65,3 @@
 </div>
 </body>
 </html>
-
-
-

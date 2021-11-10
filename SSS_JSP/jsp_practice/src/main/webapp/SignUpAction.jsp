@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ page import="java.sql.*"%>
+<%@ page import="dao.MovieMemberDAO"%>
+<%@ page import="dto.MovieMemberVO"%>
+<%@ page import="service.MovieMemberService"%>
+<%@ page import="java.util.ArrayList"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,41 +13,42 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%!private Connection con = null;
-	private Statement st = null;
-	private ResultSet rs = null;
-	private PreparedStatement pstmt=null;
-
-	String id = "";
-	String password = "";
-	String age = "";
-%>
-	<%
-	Class.forName("oracle.jdbc.driver.OracleDriver");
-	con = DriverManager.getConnection("jdbc:oracle:thin:@cyzhsss.iptime.org:1521:XE", "system",
-			"1234");
-	st = con.createStatement();
+	<%ArrayList<MovieMemberVO> dtos;
+	MovieMemberService service = new MovieMemberService(); 
 	%>
-<%
+	<%
 	String id=request.getParameter("id");
-	String password=request.getParameter("password");
+	String pw=request.getParameter("password");
 	String age=request.getParameter("age");
 	
 	int born = Integer.parseInt(age);
+	boolean check=false;
+	
+	dtos = service.getAllMembers();
+	
+	for (int i = 0; i < dtos.size(); i++) {
+		if (dtos.get(i).getID().equals(id)) {
+			check = true; 
+			break;
+		}
+	}
 %>
+	
 	<%
 	try{
-		pstmt=con.prepareStatement("insert into moviemember(id,pw,born) values(?,?,?)");
-		
-		pstmt.setString(1, id);
-		pstmt.setString(2, password);
-		pstmt.setInt(3, born);
-		
-		pstmt.executeUpdate();
-		response.sendRedirect("./index.jsp");
-	}catch(SQLException e){
+		if(check==false){
+	dtos=service.insertMovieMembers(id, pw, born);
+	session.setAttribute("userId", id);
+	response.sendRedirect("./index.jsp");
+	}else{
+		out.print("이미 사용중인 아이디입니다. 다시 시도해주세요");%>
+		<button onClick="document.location.href='SignUp.jsp'">뒤로가기</button>
+	<%}
+	}catch(Exception e){
 		e.printStackTrace();
 	}
+	
 	%>
+	
 </body>
 </html>

@@ -1,22 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <div>
-<% 
+<%
+request.setCharacterEncoding("UTF-8");
 String title = request.getParameter("title");
 %>
-	<h1 style="text-align:center">╫ц╟ёю╩ ╪╠ецго╪╪©Д.</h1>
-	
-<a href="./seat.jsp?time=12&title=<%=title%>"><button>12╫це╦юс</button></a><br>
-<a href="./seat.jsp?time=15&title=<%=title%>"><button>15╫це╦юс</button></a><br>
-<a href="./seat.jsp?time=18&title=<%=title%>"><button>18╫це╦юс</button></a><br>
-<%=title %>
+
+	<h1 style="text-align:center">Л▀°Й╟└Л²└ Л└═М┐²М∙≤Л└╦Л ■.</h1>
+
+<form action="seat.jsp" method="post">
+<input type="hidden" name="time" value="12">
+<input type="hidden" name="title" value="<%=title%>">
+<input type="submit" value="12Л▀°М┐─Л·└">
+</form>
+<br>
+<form action="seat.jsp" method="post">
+<input type="hidden" name="time" value="15">
+<input type="hidden" name="title" value="<%=title%>">
+<input type="submit" value="15Л▀°М┐─Л·└">
+</form>
+<br>
+<form action="seat.jsp" method="post">
+<input type="hidden" name="time" value="18">
+<input type="hidden" name="title" value="<%=title%>">
+<input type="submit" value="18Л▀°М┐─Л·└">
+</form>
 	
 </div>
 </body>
