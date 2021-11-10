@@ -14,41 +14,31 @@ dto.MovieMemberVO,
 <body>
 <%
 ArrayList<MovieVO> dtos2;
+ArrayList<MovieVO> dtos3;
 MovieService service2 = new MovieService();
+MovieService service3 = new MovieService();
 dtos2= service2.getAllMoviePoster();
+dtos3= service3.getAllMovieSearch();
+String title="";
+int age=0;
+for(int i=0;i<4;i++){
+	title = dtos3.get(i).getTitle();
+	age = dtos3.get(i).getAge_Limit();
 %>
-
 <div>
-<b>인셉션</b><br>
-<img src="<%=dtos2.get(0).getPoster()%>" width="169" height="242">
-<form action="time.jsp" method="post">
-<input type="hidden" name="title" value="인셉션">
-<input type="submit" value="시간보기">
-</form>
-
-<b>겨울왕국</b><br>
-<img src="<%=dtos2.get(1).getPoster()%>" width="169" height="242">
-<form action="time.jsp" method="post">
-<input type="hidden" name="title" value="겨울왕국">
-<input type="submit" value="시간보기">
-</form>
+<%if(age!=0) {%>
+	<b><%=title %>&nbsp;<%=age %>세 이용가</b><br>
+<%}else{ %>
+	<b><%=title %>&nbsp;모든 연령 시청가능</b><br>
+<%} %>
+	<img src="<%=dtos2.get(i).getPoster()%>" width="169" height="242">
+	<form action="time.jsp" method="post">
+	<input type="hidden" name="title" value="<%=title%>">
+	<input type="submit" value="시간보기">
+	</form>
 </div>
-
-<b>킹스맨</b><br>
-<img src="<%=dtos2.get(2).getPoster()%>" width="169" height="242">
-<form action="time.jsp" method="post">
-<input type="hidden" name="title" value="킹스맨">
-<input type="submit" value="시간보기">
-</form>
-
-<b>기생충</b><br>
-<img src="<%=dtos2.get(3).getPoster()%>" width="169" height="242">
-<form action="time.jsp" method="post">
-<input type="hidden" name="title" value="기생충">
-<input type="submit" value="시간보기">
-</form>
-
-
+<%}
+%>
 
 </body>
 </html>

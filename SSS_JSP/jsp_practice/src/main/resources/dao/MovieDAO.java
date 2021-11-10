@@ -69,8 +69,6 @@ public class MovieDAO {
 		}
 		return dtos2;
 	}
-	
-	
 
 	public ArrayList<MovieVO> UpdateMovieReserved(String title, String timeSelect, int seatchoice,String loginID) {
 		String SQL = "update movie set reserved=1,id=? where title=? and movie_time=TO_DATE(?,'HH24:MI:SS') and seat=?";
@@ -122,7 +120,6 @@ public class MovieDAO {
 		}
 	}
 	
-	
 	public ArrayList<MovieVO> getMovieSearch(String search){		//영화 검색 코드
 		dtos2 = new ArrayList<MovieVO>();// dtos2 초기화
 		String SQL = "select * from movie where instr(title,'"+search+"') > 0 and seat=0 and TO_CHAR(movie_time,'hh24:mi:ss') = '12:00:00'";
@@ -167,14 +164,4 @@ public class MovieDAO {
 		}
 		return dtos2;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

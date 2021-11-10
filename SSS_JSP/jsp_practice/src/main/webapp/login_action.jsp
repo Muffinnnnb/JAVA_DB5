@@ -17,7 +17,7 @@ String password=request.getParameter("password");
 		if(result==true){
 			System.out.println("로그인 성공!");
 			session.setAttribute("userId", userId);
-			response.sendRedirect("./index.jsp");
+			response.sendRedirect("index.jsp");
 		} else {
 			System.out.println("로그인 실패!");
 %>

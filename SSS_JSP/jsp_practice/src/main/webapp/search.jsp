@@ -4,7 +4,8 @@
 dto.MovieMemberVO,
  dto.MovieVO,
  service.MovieMemberService,
- service.MovieService" %>
+ service.MovieService,
+ java.util.Enumeration" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -45,19 +46,36 @@ dto.MovieMemberVO,
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
+
+
 <%
+
+
+
+ 
+// 사용자의 브라우저 확인
+String userAgent = request.getHeader("User-Agent") ;
+
+if(userAgent.indexOf("Trident") > -1) {												// IE
+%>
+	<script>
+	alert("인터넷 익스프로러는 지원하지 않습니다. 크롬, 웨일, 엣지 등 다른 브라우저를 이용해 주세요.");
+	</script>
+	<%
+} 
+	
+
+
+
+%>
+
+<% 
+
 ArrayList<MovieVO> dtos2; // 영화정보용
 MovieService service2 = new MovieService();
-
-
-
 String smv="";
 request.setCharacterEncoding("euc-kr");
 smv = request.getParameter("smv");
-
-
-
-
 if (smv!=null&&smv!=""){
 	dtos2= service2.getMovieSearch(smv);	
 	for (int i = 0; i < dtos2.size(); i++) {%>
@@ -107,11 +125,10 @@ if (smv!=null&&smv!=""){
 	
 	if (dtos2.size()==0){
 		%>
-		<h1>검색 결과가 없습니다.</h1>
+		<h1>검색 결과가 <br>없습니다.</h1>
 		<%
 	}
 }
-
 else{
 	dtos2= service2.getAllMovieSearch();
 	
@@ -152,7 +169,14 @@ else{
         </div>
         <!-- Product actions-->
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="reservation.jsp">예매하기</a></div>
+        <%Object userId = session.getAttribute("userId");%>
+	<%if(userId==null){%><!-- 로그인이 안돼잇으면 로그인하기 -->
+		<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="login.jsp">예매하기</a></div>
+		<br>
+	<%} else {%><!-- 로그인이 돼잇으면 예매 -->
+		<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="movie.jsp">예매하기</a></div>
+	<%}%>
+            
         </div>
     </div>
 </div>

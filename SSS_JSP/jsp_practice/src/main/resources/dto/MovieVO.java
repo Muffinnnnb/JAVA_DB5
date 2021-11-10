@@ -31,7 +31,6 @@ public class MovieVO {
 		this.poster=poster;
 	}
 	
-	
 	public String getTitle() {
 		return title;
 	}

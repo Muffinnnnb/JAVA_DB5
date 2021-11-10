@@ -35,5 +35,5 @@ public class MovieService {
 	public ArrayList<MovieVO> getAllMovieSearch(){
 		return dao.getAllMovieSearch();
 	}
-	
+
 }

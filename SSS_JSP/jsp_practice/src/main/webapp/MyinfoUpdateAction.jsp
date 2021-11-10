@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-    <%@ page import="dto.MovieMemberVO"%>
-<%@ page import="service.MovieMemberService"%>
-<%@ page import="java.util.ArrayList"%>
+    <%@ page import="dto.MovieMemberVO,service.MovieMemberService,java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +22,8 @@
 	
 	%>
 	<script>
+
+
 	alert("정보수정이 완료되었습니다.");
 	location.href='./Myinfo.jsp?userId=<%=userId%>';
 	</script>
