@@ -4,7 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>영화 시간 선택</title>
+<style>
+body {
+        height: 100vh;
+        background-image: url('beach-g5d22e39b7_1920.jpg');
+        background-repeat : no-repeat;
+        background-size : cover;
+      }
+</style>
 </head>
 <body>
 <div>

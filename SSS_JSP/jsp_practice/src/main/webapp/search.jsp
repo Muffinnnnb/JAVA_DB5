@@ -115,7 +115,14 @@ if (smv!=null&&smv!=""){
             </div>
             <!-- Product actions-->
             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="reservation.jsp">예매하기</a></div>
+                        <%Object userId = session.getAttribute("userId");%>
+	<%if(userId==null){%><!-- 로그인이 안돼잇으면 로그인하기 -->
+		<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="login.jsp">예매하기</a></div>
+		<br>
+	<%} else {%><!-- 로그인이 돼잇으면 예매 -->
+		<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="movie.jsp">예매하기</a></div>
+	<%}%>
+           
             </div>
         </div>
     </div>

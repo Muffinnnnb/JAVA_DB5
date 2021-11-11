@@ -33,15 +33,20 @@ ArrayList<MovieVO> dtos2;
 	}
 	
 	%>
-	<br>
-<h1 class="text-center">내 정보 보기</h1>
+   <header class="bg-dark py-2">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 font-weight-bold">내 정보 보기</h1>                   
+                </div>
+            </div>
+        </header>
+<div class="container">
+<div style="text-align:right; margin-right:10px;">
 <br>
-<div style="text-align:right; margin-right:20px;">
 <button id="btn1" type="button" class="btn btn-outline-dark" onClick="document.location.href='MyinfoUpdate.jsp?userId=<%=userId%>'">정보 수정</button>
 <button id="btn2" type="button" class="btn btn-outline-dark" onClick="document.location.href='index.jsp'"> 홈 </button>
 </div>
 <br>
-<div class="container">
 <table class="table table-striped text-center" style=" border:1px solid black;">
   <tbody>
     <tr>
@@ -58,16 +63,29 @@ ArrayList<MovieVO> dtos2;
     </tr>
   </tbody>
 </table>
-
 </div>
+
+<%
+int chk=0; // 예매 내역 체크변수
+dtos2=service2.getAllMovie();
+for(int i=0;i<dtos2.size();i++){
+if(dtos2.get(i).getId().equals(userId)){
+	chk++; // 예매 내역이있다면 +1
+	}
+}
+	if(chk>=1){%> 
+		   <header class="bg-dark py-2">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 font-weight-bold">예매 내역</h1>                 
+                </div>
+            </div>
+        </header>
+	<% }%>
 <div class="container">	
-	<% dtos2=service2.getAllMovie();
-	for(int i=0;i<dtos2.size();i++){
-		if(i==0){%>
-		<br>
-			<h1 class="text-center">예매 내역</h1>
-			<br>
- <%	}
+<br>
+	<%for(int i=0;i<dtos2.size();i++){
+
 		if(dtos2.get(i).getId().equals(userId)){
 			String title=dtos2.get(i).getTitle();
 			String time =dtos2.get(i).getMovie_Time().substring(11,16);
