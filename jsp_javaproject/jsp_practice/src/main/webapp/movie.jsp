@@ -9,7 +9,7 @@ dto.MovieMemberVO,
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>영화 목록</title>
 <style>
 body {
         height: 100vh;

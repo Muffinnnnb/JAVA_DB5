@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>영화 좌석 선택</title>
 <style>
 body {
         height: 100vh;

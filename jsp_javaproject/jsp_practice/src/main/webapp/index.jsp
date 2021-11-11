@@ -11,7 +11,7 @@ dto.MovieMemberVO,
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>영화 예약 홈</title>
 
 <style>
 .view {

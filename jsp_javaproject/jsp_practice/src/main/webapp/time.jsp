@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>영화 시간 선택</title>
 <style>
 body {
         height: 100vh;
