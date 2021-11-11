@@ -41,9 +41,11 @@
 	dtos=service.insertMovieMembers(id, pw, born);
 	session.setAttribute("userId", id);
 	response.sendRedirect("./index.jsp");
-	}else{
-		out.print("이미 사용중인 아이디입니다. 다시 시도해주세요");%>
-		<button onClick="document.location.href='SignUp.jsp'">뒤로가기</button>
+	}else{%>
+		<script>
+		alert("이미 사용중인 아이디입니다. 다시 시도해주세요.");
+		history.back();
+		</script>
 	<%}
 	}catch(Exception e){
 		e.printStackTrace();
