@@ -17,6 +17,12 @@ dto.MovieMemberVO,
 .view {
 	text-align: center;
 }
+body {
+        height: 100vh;
+        background-image: url('beach-g5d22e39b7_1920.jpg');
+        background-repeat : no-repeat;
+        background-size : cover;
+      }
 </style>
 </head>
 <body>
