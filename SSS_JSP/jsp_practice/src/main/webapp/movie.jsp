@@ -21,21 +21,36 @@ body {
 </head>
 <body>
 <%
+
+ArrayList<MovieMemberVO> dtos;
 ArrayList<MovieVO> dtos2;
 ArrayList<MovieVO> dtos3;
+MovieMemberService service = new MovieMemberService();
 MovieService service2 = new MovieService();
 MovieService service3 = new MovieService();
+dtos= service.getAllMembers();
 dtos2= service2.getAllMoviePoster();
 dtos3= service3.getAllMovieSearch();
+
+String id = (String)session.getAttribute("userId");
 String title="";
+int ageLimit=0;
 int age=0;
+
+for(int i=0;i<dtos.size();i++){
+	if(dtos.get(i).getID().equals(id))
+		age=dtos.get(i).getBorn();
+}
+
 for(int i=0;i<4;i++){
 	title = dtos3.get(i).getTitle();
-	age = dtos3.get(i).getAge_Limit();
+	ageLimit = dtos3.get(i).getAge_Limit();
+	
+	if(age>=ageLimit){
 %>
 <div>
-<%if(age!=0) {%>
-	<b><%=title %>&nbsp;<%=age %>세 이용가</b><br>
+<%if(ageLimit!=0) {%>
+	<b><%=title %>&nbsp;<%=ageLimit %>세 이용가</b><br>
 <%}else{ %>
 	<b><%=title %>&nbsp;모든 연령 시청가능</b><br>
 <%} %>
@@ -45,8 +60,7 @@ for(int i=0;i<4;i++){
 	<input type="submit" value="시간보기">
 	</form>
 </div>
-<%}
+<%}}
 %>
-
 </body>
 </html>
